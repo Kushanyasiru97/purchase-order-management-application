@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PurchaseOrderManagement.Backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,12 +13,13 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<PurchaseOrderDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("PurchaseOrdersConn")));
 
+// Configure CORS - Allow Angular app
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAllOrigins",
-        builder =>
+    options.AddPolicy("AllowAngularApp",
+        policy =>
         {
-            builder.AllowAnyOrigin()
+            policy.WithOrigins("http://localhost:4200")  // Remove trailing slash
                    .AllowAnyMethod()
                    .AllowAnyHeader();
         });
@@ -31,7 +33,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseCors();
+// Use the CORS policy
+app.UseCors("AllowAngularApp");
 
 app.UseHttpsRedirection();
 

@@ -1,7 +1,47 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|e:\\coninnova assestment\\purchase-order-management-application\\purchaseordermanagement.backend\\purchaseordermanagement.backend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|solutionrelative:purchaseordermanagement.backend\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|e:\\coninnova assestment\\purchase-order-management-application\\purchaseordermanagement.backend\\purchaseordermanagement.backend\\controllers\\purchaseorderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|solutionrelative:purchaseordermanagement.backend\\controllers\\purchaseorderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|e:\\coninnova assestment\\purchase-order-management-application\\purchaseordermanagement.backend\\purchaseordermanagement.backend\\models\\purchaseorderdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|solutionrelative:purchaseordermanagement.backend\\models\\purchaseorderdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|e:\\coninnova assestment\\purchase-order-management-application\\purchaseordermanagement.backend\\purchaseordermanagement.backend\\models\\purchaseorders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|solutionrelative:purchaseordermanagement.backend\\models\\purchaseorders.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|e:\\coninnova assestment\\purchase-order-management-application\\purchaseordermanagement.backend\\purchaseordermanagement.backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|solutionrelative:purchaseordermanagement.backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|e:\\coninnova assestment\\purchase-order-management-application\\purchaseordermanagement.backend\\purchaseordermanagement.backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|solutionrelative:purchaseordermanagement.backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\ConInnova Assestment\\PurchaseOrderController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|e:\\coninnova assestment\\purchase-order-management-application\\purchaseordermanagement.backend\\purchaseordermanagement.backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|solutionrelative:purchaseordermanagement.backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Migrations\\20251210074538_First Migration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:PurchaseOrderManagement.Backend\\Migrations\\20251210074538_First Migration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|e:\\coninnova assestment\\purchase-order-management-application\\purchaseordermanagement.backend\\purchaseordermanagement.backend\\purchaseordermanagement.backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0941A080-65AB-5F61-A3F3-FCEDB4CF21DB}|PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj|solutionrelative:purchaseordermanagement.backend\\purchaseordermanagement.backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +49,137 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\.gitignore",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\.gitignore",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\.gitignore",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-12-10T11:29:37.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "20251210074538_First Migration.cs",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Migrations\\20251210074538_First Migration.cs",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\Migrations\\20251210074538_First Migration.cs",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Migrations\\20251210074538_First Migration.cs",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\Migrations\\20251210074538_First Migration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T07:45:40.003Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PurchaseOrderDbContext.cs",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Models\\PurchaseOrderDbContext.cs",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\Models\\PurchaseOrderDbContext.cs",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Models\\PurchaseOrderDbContext.cs",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\Models\\PurchaseOrderDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T07:43:07.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PurchaseOrders.cs",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Models\\PurchaseOrders.cs",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\Models\\PurchaseOrders.cs",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Models\\PurchaseOrders.cs",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\Models\\PurchaseOrders.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAA9wCYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T07:23:51.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PurchaseOrdersController.cs",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Controllers\\PurchaseOrdersController.cs",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\Controllers\\PurchaseOrdersController.cs",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Controllers\\PurchaseOrdersController.cs",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\Controllers\\PurchaseOrdersController.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAuwGsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T07:54:05.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\appsettings.json",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\appsettings.json",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\appsettings.json",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAACHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-10T07:35:33.626Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Program.cs",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\Program.cs",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Program.cs",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\Program.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAuwCwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T07:34:50.615Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PurchaseOrderController.cs",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\PurchaseOrderController.cs",
+              "RelativeDocumentMoniker": "..\\..\\PurchaseOrderController.cs",
+              "ToolTip": "E:\\ConInnova Assestment\\PurchaseOrderController.cs",
+              "RelativeToolTip": "..\\..\\PurchaseOrderController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-10T07:50:47.893Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\Properties\\launchSettings.json",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\Properties\\launchSettings.json",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-10T07:49:13.398Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "PurchaseOrderManagement.Backend",
+              "DocumentMoniker": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj",
+              "RelativeDocumentMoniker": "PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj",
+              "ToolTip": "E:\\ConInnova Assestment\\purchase-order-management-application\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj",
+              "RelativeToolTip": "PurchaseOrderManagement.Backend\\PurchaseOrderManagement.Backend.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-12-10T07:29:02.115Z",
+              "EditorCaption": ""
             }
           ]
         }

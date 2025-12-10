@@ -1,37 +1,39 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Net.NetworkInformation;
 
 namespace PurchaseOrderManagement.Backend.Models
 {
-
     [Table("PurchaseOrders")]
-    public class PurchaseOrders
+    public class PurchaseOrder
     {
         [Key]
-        public int purchaseOrderId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int PurchaseOrderId { get; set; }
 
         [Required]
-        [Column(TypeName = "uniqueidentifier")]
-        public Guid poNumber { get; set; }
+        [Column(TypeName = "nvarchar(50)")]
+        [StringLength(50)]
+        public string PoNumber { get; set; } = "";
 
         [Required]
-        [StringLength(500)]
-        public string poDescription { get; set; }
+        [Column(TypeName = "nvarchar(500)")]
+        public string PoDescription { get; set; } = "";
 
         [Required]
-        [StringLength(200)]
-        public string supplierName { get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string SupplierName { get; set; } = "";
 
         [Required]
-        public DateTime orderDate { get; set; }
+        public DateTime OrderDate { get; set; }
 
         [Required]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal totalAmount { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "Total amount must be a positive value")]
+        public decimal TotalAmount { get; set; }
 
         [Required]
-        [StringLength(20)]
-        public string status { get; set; }
+        [Column(TypeName = "nvarchar(20)")]
+        public string Status { get; set; } = "";
     }
 }
