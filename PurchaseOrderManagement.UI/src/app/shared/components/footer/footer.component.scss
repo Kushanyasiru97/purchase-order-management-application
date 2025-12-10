@@ -1,0 +1,13 @@
+@import "../../../../styles/variables";
+.footer {
+  text-align: center;
+  margin-top: auto; // Push to bottom
+  margin-bottom: 0; // Remove bottom margin
+  
+
+  p {
+    color: $title-header-color-light;
+    font-size: 0.8rem;
+    margin-bottom: 0; 
+  }
+}
