@@ -14,7 +14,7 @@ export class InputValidationService {
   constructor() {}
 
   /**
-   * Validate PO Number format
+   * Validate PO Number - Relaxed validation (no strict format required)
    */
   validatePONumber(poNumber: string): ValidationResult {
     const errors: string[] = [];
@@ -30,9 +30,10 @@ export class InputValidationService {
       errors.push('PO Number must be between 3 and 50 characters');
     }
     
-    const validFormat = /^[A-Z]{2,4}-\d{4}-\d{3,6}$/i.test(poNumber);
-    if (!validFormat) {
-      errors.push('PO Number must follow format: PO-YYYY-XXX (e.g., PO-2025-001)');
+    // Allow alphanumeric characters, hyphens, and underscores
+    const validFormat = /^[A-Za-z0-9\-_]+$/;
+    if (!validFormat.test(poNumber)) {
+      errors.push('PO Number can only contain letters, numbers, hyphens, and underscores');
     }
     
     if (this.containsSQLInjection(poNumber)) {
@@ -47,7 +48,7 @@ export class InputValidationService {
   }
 
   /**
-   * Validate supplier name
+   * Validate Supplier Name
    */
   validateSupplierName(supplierName: string): ValidationResult {
     const errors: string[] = [];
@@ -80,7 +81,7 @@ export class InputValidationService {
   }
 
   /**
-   * Validate description
+   * Validate Description
    */
   validateDescription(description: string): ValidationResult {
     const errors: string[] = [];
@@ -108,7 +109,7 @@ export class InputValidationService {
   }
 
   /**
-   * Validate amount (currency)
+   * Validate Amount - Supports decimal values
    */
   validateAmount(amount: number | string): ValidationResult {
     const errors: string[] = [];
@@ -118,7 +119,20 @@ export class InputValidationService {
       return { isValid: false, errors };
     }
     
-    const numAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
+    // Convert to string to preserve decimal places
+    const amountStr = typeof amount === 'number' ? amount.toString() : amount.toString().trim();
+    
+    // Check if it's a valid number format (including decimals)
+    const validNumberPattern = /^-?\d+(\.\d{1,2})?$/;
+    if (!validNumberPattern.test(amountStr) && !amountStr.match(/^-?\d+\.?\d*$/)) {
+      const numAmount = parseFloat(amountStr);
+      if (isNaN(numAmount)) {
+        errors.push('Amount must be a valid number');
+        return { isValid: false, errors };
+      }
+    }
+    
+    const numAmount = parseFloat(amountStr);
     
     if (isNaN(numAmount)) {
       errors.push('Amount must be a valid number');
@@ -133,16 +147,19 @@ export class InputValidationService {
       errors.push('Amount exceeds maximum allowed value');
     }
     
-    const decimalPlaces = (numAmount.toString().split('.')[1] || '').length;
-    if (decimalPlaces > 2) {
-      errors.push('Amount can have maximum 2 decimal places');
+    // Check decimal places using the string representation
+    if (amountStr.includes('.')) {
+      const decimalPart = amountStr.split('.')[1];
+      if (decimalPart && decimalPart.length > 2) {
+        errors.push('Amount can have maximum 2 decimal places');
+      }
     }
     
     return { isValid: errors.length === 0, errors };
   }
 
   /**
-   * Validate date
+   * Validate Order Date
    */
   validateOrderDate(date: Date | string | null): ValidationResult {
     const errors: string[] = [];
@@ -181,7 +198,7 @@ export class InputValidationService {
   }
 
   /**
-   * Validate status
+   * Validate Status
    */
   validateStatus(status: string): ValidationResult {
     const errors: string[] = [];

@@ -50,7 +50,7 @@ export interface TopPanelFilters {
 export interface BaseFieldConfig<T extends string> {
   key: T;
   label: string;
-  type: 'text' | 'number' | 'date' | 'dropdown' | 'textarea' | 'phone' | 'address';
+  type: 'text' | 'number' | 'date' | 'dropdown' | 'textarea' ;
   required?: boolean;
   options?: any[];
   placeholder?: string;

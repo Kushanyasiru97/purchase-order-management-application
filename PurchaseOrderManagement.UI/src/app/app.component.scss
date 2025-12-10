@@ -1,9 +1,6 @@
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-.content {
-  flex: 1;
+  height: 100vh;          // Takes full viewport height
+  overflow: auto;        // Prevents page scrolling
 }

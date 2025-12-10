@@ -1,13 +1,27 @@
 @import "../../../../styles/variables";
+
 .footer {
   text-align: center;
-  margin-top: auto; // Push to bottom
-  margin-bottom: 0; // Remove bottom margin
-  
+  margin-top: auto;
+  margin-bottom: 0;
+
+  .footer-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    @media (max-width: 768px) {
+      padding: 0 1rem;
+    }
+
+    @media (max-width: 480px) {
+      padding: 0 0.75rem;
+    }
+  }
 
   p {
     color: $title-header-color-light;
     font-size: 0.8rem;
-    margin-bottom: 0; 
+    margin-bottom: 0;
   }
 }

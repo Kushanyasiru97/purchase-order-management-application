@@ -22,7 +22,7 @@ export interface PurchaseOrderFormData {
   poDescription: string;
   supplier: string;
   orderDate: Date | null;
-  totalAmount: number;
+  totalAmount: string | number | null;
   status: string;
 }
 
@@ -138,7 +138,7 @@ export class SideFormComponent implements OnInit, OnChanges {
         [Validators.required]
       ],
       totalAmount: [
-        0, 
+        null, 
         [
           Validators.required, 
           Validators.min(0.01),
@@ -176,11 +176,21 @@ export class SideFormComponent implements OnInit, OnChanges {
       formDataToUpdate.supplier = this.validationService.sanitizeInput(formDataToUpdate.supplier);
     }
     
-    // Ensure totalAmount is a number with 2 decimal places
-    if (formDataToUpdate.totalAmount) {
-      formDataToUpdate.totalAmount = parseFloat(
-        parseFloat(formDataToUpdate.totalAmount.toString()).toFixed(2)
-      );
+    // Handle totalAmount - format to 2 decimal places for display
+    if (formDataToUpdate.totalAmount !== null && formDataToUpdate.totalAmount !== undefined && formDataToUpdate.totalAmount !== '') {
+      // Convert to number, ensuring decimals are preserved
+      const numValue = typeof formDataToUpdate.totalAmount === 'string' 
+        ? parseFloat(formDataToUpdate.totalAmount) 
+        : formDataToUpdate.totalAmount;
+      
+      // Format to 2 decimal places as string for proper display
+      if (!isNaN(numValue)) {
+        formDataToUpdate.totalAmount = numValue.toFixed(2);
+      } else {
+        formDataToUpdate.totalAmount = null;
+      }
+    } else {
+      formDataToUpdate.totalAmount = null;
     }
     
     // Convert date string to Date object if needed
@@ -213,11 +223,19 @@ export class SideFormComponent implements OnInit, OnChanges {
         formValue.supplier = this.validationService.sanitizeInput(formValue.supplier);
       }
       
-      // Ensure totalAmount has 2 decimal places
-      if (formValue.totalAmount) {
-        formValue.totalAmount = parseFloat(
-          parseFloat(formValue.totalAmount.toString()).toFixed(2)
-        );
+      // Handle totalAmount - preserve decimal values and format to 2 decimal places
+      if (formValue.totalAmount !== null && formValue.totalAmount !== undefined && formValue.totalAmount !== '') {
+        const numValue = typeof formValue.totalAmount === 'string' 
+          ? parseFloat(formValue.totalAmount) 
+          : formValue.totalAmount;
+        
+        if (!isNaN(numValue)) {
+          formValue.totalAmount = parseFloat(numValue.toFixed(2));
+        } else {
+          formValue.totalAmount = null;
+        }
+      } else {
+        formValue.totalAmount = null;
       }
       
       this.formData = { ...this.formData, ...formValue };
@@ -232,7 +250,7 @@ export class SideFormComponent implements OnInit, OnChanges {
       poDescription: '',
       supplier: '',
       orderDate: null,
-      totalAmount: 0,
+      totalAmount: null,
       status: ''
     };
   }
@@ -378,5 +396,75 @@ export class SideFormComponent implements OnInit, OnChanges {
     }
 
     return this.poForm.valid;
+  }
+
+  /**
+   * Handle key press for amount input - allow only numbers and decimal point
+   */
+  onAmountKeyPress(event: KeyboardEvent): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    const inputValue = (event.target as HTMLInputElement).value;
+    
+    // Allow: backspace, delete, tab, escape, enter
+    if ([46, 8, 9, 27, 13].indexOf(charCode) !== -1 ||
+        // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+        (charCode === 65 && event.ctrlKey === true) ||
+        (charCode === 67 && event.ctrlKey === true) ||
+        (charCode === 86 && event.ctrlKey === true) ||
+        (charCode === 88 && event.ctrlKey === true)) {
+      return true;
+    }
+    
+    // Allow decimal point only once
+    if (charCode === 46) {
+      if (inputValue.indexOf('.') !== -1) {
+        event.preventDefault();
+        return false;
+      }
+      return true;
+    }
+    
+    // Allow only numbers (0-9)
+    if (charCode < 48 || charCode > 57) {
+      event.preventDefault();
+      return false;
+    }
+    
+    // Check decimal places limit
+    if (inputValue.indexOf('.') !== -1) {
+      const decimalPart = inputValue.split('.')[1];
+      if (decimalPart && decimalPart.length >= 2) {
+        event.preventDefault();
+        return false;
+      }
+    }
+    
+    return true;
+  }
+
+  /**
+   * Format amount to 2 decimal places on blur
+   */
+  formatAmountOnBlur(): void {
+    const control = this.poForm.get('totalAmount');
+    if (control && control.value !== null && control.value !== undefined && control.value !== '') {
+      let value = control.value;
+      
+      // Remove any non-numeric characters except decimal point
+      if (typeof value === 'string') {
+        value = value.replace(/[^\d.]/g, '');
+      }
+      
+      const numValue = parseFloat(value);
+      
+      if (!isNaN(numValue) && numValue >= 0) {
+        // Format to 2 decimal places
+        const formatted = numValue.toFixed(2);
+        control.setValue(formatted, { emitEvent: true });
+      } else if (value === '' || value === null) {
+        // If empty, set to null
+        control.setValue(null, { emitEvent: true });
+      }
+    }
   }
 }
