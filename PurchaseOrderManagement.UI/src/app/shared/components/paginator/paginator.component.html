@@ -1,0 +1,27 @@
+<div class="flex items-center justify-between w-full">
+  <!-- Dropdown on the left -->
+  <div class="flex items-center font-14">
+    <span class="perpage-txt">Items per page:</span>
+    <p-dropdown
+      [options]="options"
+      optionLabel="label"
+      optionValue="value"
+      [(ngModel)]="rows"
+      (onChange)="onRowsChange($event.value)">
+    ></p-dropdown>
+  </div>
+  <div class="flex items-center">
+ 
+  <!-- Paginator on the right -->
+ 
+   <p-paginator
+        (onPageChange)="onPageChange($event)"
+        [first]="first"
+        [rows]="rows"
+        [totalRecords]="totalRecords"
+        [showCurrentPageReport]="true"
+        [showPageLinks]="true"
+        [showJumpToPageDropdown]="false"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}" />
+</div>
+</div>

@@ -1,0 +1,27 @@
+<p-dialog [(visible)]="visible" [modal]="true" [header]="header" [closable]="false" [position]="'topright'"
+    [style]="{width: '500px', height: '215px'}">
+    <p>{{ message }}</p>
+
+    <ng-template pTemplate="footer">
+        <div class="flex justify-end gap-2 pt-4">
+            @if (showReject) {
+            <button pButton [label]="rejectLabel" [class]="rejectClass" (click)="onReject()"></button>
+            }
+
+            @if (showDelete)
+            {
+            <button pButton [label]="deleteLabel" [class]="deleteClass" [icon]="iconDelete"
+                (click)="onDelete()"></button>
+            }
+            @if (showConfirm)
+            {
+            <button pButton
+            [label]="acceptLabel"
+            [class]="confirmClass"
+            (click)="onAccept()"></button>
+            }
+
+        </div>
+    </ng-template>
+
+</p-dialog>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PurchaseOrderManagement.Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99e24f5d728a00f78a7ec3736934c7cee767c6f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f98f1a11a2a579b36c0e28e054e9c2566d96576b")]
 [assembly: System.Reflection.AssemblyProductAttribute("PurchaseOrderManagement.Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PurchaseOrderManagement.Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

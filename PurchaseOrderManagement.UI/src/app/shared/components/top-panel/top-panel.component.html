@@ -1,0 +1,191 @@
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-1 lg:gap-2">
+  <!-- Dashboard Title Section (Left Side) -->
+  <div *ngIf="config.showTitle" class="flex-shrink-0 lg:order-1">
+    <h2 
+      [class]="config.TitleClass || 'text-2xl font-bold text-[#001a4c]'"
+      [ngStyle]="config.TitleStyle || {}"
+    >
+      {{ config.Title || 'Title' }}
+    </h2>
+  </div>
+
+  <!-- Search and Filters Section (Center/Left) -->
+  <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 flex-1 min-w-0 lg:order-2">
+    <div *ngIf="config.showSearch" class="w-full sm:w-auto flex-shrink-0">
+      <div class="relative w-full sm:w-44 lg:w-48 rounded-full">
+        <i class="pi pi-search absolute left-3 top-1/2 -translate-y-1/2 text-sm pointer-events-none"></i>
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="searchTerm"
+          [placeholder]="config.searchPlaceholder || 'Search...'"
+          class="w-full pl-8 py-2 text-sm placeholder-[#6B7271] bg-[#EFF0F0] border border-[#EFF0F0] rounded-full transition-all duration-200"
+          (keyup.enter)="onSearch()"
+          (input)="onSearchInputChange()"
+        />
+      </div>
+    </div>
+
+    <button
+      *ngIf="config.showSearch"
+      pButton
+      type="button"
+      [label]="config.searchButtonLabel"
+      [ngStyle]="{ 'background-color': btnColor }"
+      class="btn-primary flex-shrink-0"
+      (click)="onSearch()"
+    ></button>
+  </div>
+  
+  <!-- Controls Section (Right Side) -->
+  <div class="flex flex-col lg:flex-row lg:items-center gap-2 w-full lg:w-auto lg:mt-0 flex-shrink-0 lg:order-3">
+    <div *ngIf="config.showDropdown" class="w-full sm:w-auto flex-shrink-0">
+      <p-dropdown
+        [(ngModel)]="dropdown1Value"
+        [options]="config.dropdownOptions || []"
+        [placeholder]="config.dropdownPlaceholder || 'Select option'"
+        optionLabel="label"
+        optionValue="value"
+        [showClear]="true"
+        styleClass="w-full sm:w-24 md:w-32 lg:w-36 top-dropdown"
+        panelStyleClass="text-sm"
+        (onChange)="onDropdown1Change($event)"
+        class="custom-dropdown"
+        [style]="{
+          border: '1px solid #D1D5DB',
+          'border-radius': '8px',
+          height: '37px'
+        }"
+      ></p-dropdown>
+    </div>
+
+    <div *ngIf="config.showDateFilter" class="w-full lg:w-auto flex-shrink-0">
+      <div class="flex flex-col gap-3 relative date-picker-dropdown">
+        <div class="flex justify-end">
+          <button
+            type="button"
+            class="relative w-full sm:w-40 lg:w-44 flex items-center justify-between px-2 py-2 text-sm bg-white border-2 border-[#EFF0F0] rounded-lg transition-all duration-200 date-range-button"
+            (click)="toggleDatePicker()"
+            [class.active]="showDatePicker"
+          >
+            <div class="flex items-center gap-2 min-w-0">
+              <i class="pi pi-calendar text-black text-sm flex-shrink-0"></i>
+              <span
+                class="truncate"
+                [class.text-[#001a4c]]="hasDateRange()"
+                [class.text-[#9ca3af]]="!hasDateRange()"
+                [class.font-medium]="hasDateRange()"
+              >
+                {{ getDateRangeDisplayText() }}
+              </span>
+            </div>
+            <i
+              class="pi pi-chevron-down text-sm flex-shrink-0"
+              [class.rotate-180]="showDatePicker"
+            ></i>
+          </button>
+        </div>
+
+        <div
+          *ngIf="showDatePicker"
+          class="absolute z-50 top-full right-0 mt-2"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="dual-calendar-container flex flex-col gap-1 w-fit bg-white rounded-lg shadow-xl border border-gray-200 p-2">
+            <div class="flex justify-end items-center mb-1">
+              <button
+                type="button"
+                class="text-gray-400 hover:text-gray-600 text-lg p-1"
+                (click)="closeDatePicker()"
+              >
+                <i class="pi pi-times"></i>
+              </button>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-1 sm:gap-2 w-fit">
+              <div class="w-fit">
+                <label class="block text-sm font-medium text-[#001a4c] mb-1 uppercase tracking-wide text-center">
+                  From Date
+                </label>
+                <div class="relative calendar-container-small w-fit">
+                  <p-calendar
+                    [(ngModel)]="fromDate"
+                    (ngModelChange)="onFromDateChange($event)"
+                    [readonlyInput]="true"
+                    [inline]="true"
+                    [monthNavigator]="true"
+                    [yearNavigator]="true"
+                    [yearRange]="config.yearRange"
+                    [maxDate]="toDate"
+                    dateFormat="dd M yy"
+                    styleClass="custom-calendar"
+                  ></p-calendar>
+                </div>
+              </div>
+
+              <div class="w-fit">
+                <label class="block text-sm font-medium text-[#001a4c] mb-1 uppercase tracking-wide text-center">
+                  To Date
+                </label>
+                <div class="relative calendar-container-small w-fit">
+                  <p-calendar
+                    [(ngModel)]="toDate"
+                    (ngModelChange)="onToDateChange($event)"
+                    [readonlyInput]="true"
+                    [inline]="true"
+                    [monthNavigator]="true"
+                    [yearNavigator]="true"
+                    [yearRange]="config.yearRange"
+                    [minDate]="fromDate"
+                    dateFormat="dd M yy"
+                    styleClass="custom-calendar"
+                  ></p-calendar>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end gap-2 mt-1 pt-1 border-t border-gray-100">
+              <button
+                pButton
+                type="button"
+                class="btn-secondary text-lg px-2 py-1"
+                (click)="clearDateRange()"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="config.showCustomButton" class="w-full lg:w-auto flex-shrink-0">
+      <button
+        pButton
+        type="button"
+        [ngStyle]="getCustomButtonStyle()"
+        [ngClass]="config.customButtonClass || 'btn-primary'"
+        [disabled]="config.customButtonDisabled"
+        class="w-full lg:w-auto flex-shrink-0 custom-button-with-content"
+        (click)="onCustomButtonClick()"
+      >
+        <div class="flex items-center gap-2">
+          <img
+            *ngIf="config.customButtonImage"
+            [src]="config.customButtonImage"
+            [alt]="config.customButtonImageAlt || 'Button icon'"
+            [style.width]="config.customButtonImageWidth || '20px'"
+            [style.height]="config.customButtonImageHeight || '20px'"
+            class="flex-shrink-0"
+          />
+          <i
+            *ngIf="!config.customButtonImage && config.customButtonIcon"
+            [class]="config.customButtonIcon"
+            class="flex-shrink-0"
+          ></i>
+          <span *ngIf="config.customButtonLabel">{{ config.customButtonLabel }}</span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
