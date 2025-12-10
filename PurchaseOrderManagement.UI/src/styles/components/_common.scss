@@ -1,0 +1,445 @@
+@import "../../styles/variables.scss";
+
+.p-button-secondary {
+  background-color: $btn-grey;
+  color: $btn-blue;
+  border: none;
+  height: 38px;
+  border-radius: 6px;
+  font-family: 'Urbanist-medium';
+}
+
+.txt-blue {
+  color: $btn-blue;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-16 {
+  font-size: 16px !important;
+}
+
+.font-20 {
+  font-size: 20px !important;
+}
+
+.font-22 {
+  font-size: 22px;
+}
+
+.font-semibold {
+  font-family: 'Urbanist-semibold';
+}
+
+.font-bold {
+  font-family: 'Urbanist-bold';
+}
+
+.font-medium {
+  font-family: 'Urbanist-medium';
+}
+
+.font-regular {
+  font-family: 'Urbanist-regular';
+}
+
+.fnt-black {
+  color: $font-black;
+}
+
+.table-header-row {
+  font-family: 'Urbanist-semibold';
+  font-size: 14px;
+
+  th {
+    background-color: #EEF4FF;
+   // text-align: center;
+  }
+}
+
+.table-header-row-admin {
+  font-family: 'Urbanist-semibold';
+  font-size: 14px;
+
+  th {
+    background-color: #F2F3F4;
+    //text-align: center;
+  }
+}
+
+.table-header-row-company {
+  font-family: 'Urbanist-semibold';
+  font-size: 14px;
+  th {
+    background-color: #FFF4F4;
+    //text-align: center;
+  }
+}
+
+.table-body-row {
+  font-family: 'Urbanist-regular';
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 12px;
+
+  td {
+    padding: 1rem 1rem;
+    //text-align: left;
+  }
+
+  td.action {
+    text-align: right;
+  }
+  &:last-child
+  {
+    border-bottom: none;
+  }
+}
+
+.btn-primary {
+  min-height: 30px;
+  padding: 5px 8px;
+  background-color: $btn-blue;
+  color: $font-white;
+  border: none;
+  border-radius: 7px;
+  margin: 2px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+  font-family: 'Urbanist-medium' !important;
+
+  &.btn-private {
+    background-color: $btn-blue;
+
+  }
+
+  &:hover:not(:disabled) {
+    background-color: darken($btn-blue, 10%);
+  }
+
+  &:disabled {
+    background-color: $title-header-color-light;
+    cursor: not-allowed;
+  }
+
+  &:active {
+    background-color: darken($btn-blue, 10%);
+  }
+
+  &:focus {
+    background-color: darken($btn-blue, 10%);
+  }
+}
+
+.p-button-icon {
+  font-size: 12px;
+
+  &.pi-trash {
+
+  }
+}
+
+.btn-danger {
+  background-color: $btn-red;
+  border-radius: 7px;
+  height: 31px;
+  width: 30px;
+  margin: 2px;
+}
+
+.btn-edit {
+  background-color: $btn-blue;
+  border-radius: 7px;
+  height: 31px;
+  width: 30px;
+  margin: 2px;
+}
+
+.btn-secondary {
+  background-color: $btn-grey;
+  min-height: 30px;
+  border-radius: 7px;
+  color: $btn-blue;
+  border: none;
+  padding: 5px 8px;
+  font-family: 'Urbanist-medium' !important;
+  font-size: 14px;
+}
+
+.p-sidebar-header {
+  padding: 1.25rem 1.25rem 0.2rem 1.25rem;
+}
+
+.p-sortable-column-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.form-group {
+
+  label {
+    font-family: 'Urbanist-regular';
+    font-size: 15px;
+    display: block;
+    color: $btn-blue;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  input {
+    font-family: 'Urbanist-regular';
+    font-size: 14px;
+    background-color: #f9fafb;
+  }
+}
+
+.pi-search,
+.pi-chevron-down {
+  color: $btn-blue !important;
+}
+
+.p-dropdown-trigger-icon {
+  color: $btn-blue !important;
+}
+
+.custom-calendar{
+  width: 100%;
+  padding: 0.5rem 0rem 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  color: $btn-blue;
+  border-radius: 0.375rem;
+  background-color: $font-white;
+  outline: none;
+}
+
+.custom-calendar:focus {
+  outline: none;
+  border-color: transparent;
+}
+
+.p-dropdown-label {
+  
+  font-size: 14px;
+  padding: 0.4rem 0.75rem;
+}
+
+.p-placeholder {
+  color: #9ca3af !important;
+}
+
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item {
+  padding: 0.75rem 0.5rem;
+
+  &.p-highlight {
+    color: $btn-blue !important;
+  }
+}
+
+ .p-datepicker-month {
+  margin-right: 8px;
+ }
+
+input,
+optgroup,
+select,
+textarea {
+  font-family: 'Urbanist-regular' !important;
+  font-size: 14px !important;
+}
+
+.error-message {
+  color: $btn-red;
+
+  small {
+    font-size: 12px !important;
+  }
+}
+
+.p-tabview-nav-container {
+  .p-tabview-nav-content {
+   
+    .p-highlight {
+
+      .p-tabview-nav-link {
+        background: $btn-blue;
+        color: $font-white;
+      }
+    }
+
+    .p-tabview-nav-link {
+      padding: 9px 35px;
+      border-radius: 8px;
+      margin: 0;
+      background-color: $btn-grey;
+      color: $btn-blue;
+       font-family: $font-family-medium;
+    }
+  }
+}
+
+// Status classes for labels
+.status-pass {
+  background-color: #dcfce7; // Green background
+  color: #166534; // Green text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}
+
+.status-fail {
+  background-color: #fef2f2; // Red background
+  color: #991b1b; // Red text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}
+
+.status-no-show {
+  background-color: #fefce8; // Yellow background
+  color: #854d0e; // Yellow/brown text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}
+
+.status-default {
+  background-color: #f3f4f6; // Gray background
+  color: #374151; // Gray text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}
+
+.status-scheduled {
+  background-color: #dfeffc; // Light blue background
+  color: $btn-blue; // Blue text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}
+
+.status-completed {
+  background-color: #dbeafe; // Blue background
+  color: #1e40af; // Blue text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}
+
+.status-ongoing {
+  background-color: #fed7aa;  // Orange background
+  color: #c2410c; // Orange text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}
+
+.status-pending {
+  background-color: #fefce8; // Yellow background
+  color: #854d0e; // Yellow/brown text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}
+
+// New severity classes for specific raw severity values
+.severity-low-pass {
+  background-color: rgba(31, 146, 84, 0.1); // Light green background
+  color: #1F9254; // Dark green text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+  border: 1px solid rgba(31, 146, 84, 0.2);
+}
+
+.severity-moderate {
+  background-color: rgba(185, 80, 0, 0.1); // Light orange background
+  color: #B95000; // Dark orange text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+  border: 1px solid rgba(185, 80, 0, 0.2);
+}
+
+.severity-severe {
+  background-color: rgba(220, 38, 38, 0.1); // Light red background
+  color: #DC2626; // Dark red text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.severity-life-threatening {
+  background-color: rgba(220, 38, 38, 0.15); // Slightly darker red background
+  color: #DC2626; // Dark red text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-bold'; // Bold font for life threatening
+  display: inline-block;
+  text-align: center;
+  border: 2px solid #DC2626; // Thicker border for emphasis
+  box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.1); // Subtle glow effect
+}
+
+/*.status-cancelled {
+  background-color: #fef2f2; // Red background
+  color: #991b1b; // Red text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}*/
+
+/*.status-approved {
+  background-color: #dcfce7; // Green background
+  color: #166534; // Green text
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 12px;
+  font-family: 'Urbanist-medium';
+  display: inline-block;
+  text-align: center;
+}*/
