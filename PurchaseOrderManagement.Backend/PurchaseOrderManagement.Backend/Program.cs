@@ -1,39 +1,44 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using PurchaseOrderManagement.Backend.Models;
+using PurchaseOrderManagement.Application.Interfaces.Repositories;
+using PurchaseOrderManagement.Application.Interfaces.Services;
+using PurchaseOrderManagement.Application.Services;
+using PurchaseOrderManagement.Infrastructure.Data;
+using PurchaseOrderManagement.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
+
+// Configure Database 
 builder.Services.AddDbContext<PurchaseOrderDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("PurchaseOrdersConn")));
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("PurchaseOrdersConn"),
+        sqlOptions => sqlOptions.EnableRetryOnFailure()
+    )
+);
 
-// Configure CORS - Allow Angular app
+// Register Repositories (Infrastructure Layer)
+builder.Services.AddScoped<IPurchaseOrderRepository, PurchaseOrderRepository>();
+
+// Register Services (Application Layer)
+builder.Services.AddScoped<IPurchaseOrderService, PurchaseOrderService>();
+
+// Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngularApp",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:4200")  // Remove trailing slash
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-        });
+    options.AddPolicy("AllowAngularApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
 
-// Use the CORS policy
 app.UseCors("AllowAngularApp");
 
 app.UseHttpsRedirection();
