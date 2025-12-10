@@ -8,6 +8,6 @@ namespace PurchaseOrderManagement.Backend.Models
         {
         }
 
-        public DbSet<PurchaseOrders> PurchaseOrders { get; set; } = null!;
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; } = null!;
     }
 }
