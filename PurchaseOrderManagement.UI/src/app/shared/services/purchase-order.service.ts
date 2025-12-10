@@ -27,18 +27,18 @@ export class PurchaseOrderService {
     return this.http.get<PurchaseOrder[]>(this.url);
   }
 
-  // Create a new purchase order
+  // Create purchase order
   createPurchaseOrder(order: PurchaseOrder): Observable<PurchaseOrder> {
     return this.http.post<PurchaseOrder>(this.url, order);
   }
 
-  // Update an existing purchase order
-  updatePurchaseOrder(order: PurchaseOrder): Observable<PurchaseOrder> {
-    return this.http.put<PurchaseOrder>(this.url, order);
+  // Update purchase order
+  updatePurchaseOrder(id: number, order: PurchaseOrder): Observable<PurchaseOrder> {
+    return this.http.put<PurchaseOrder>(`${this.url}/${order.purchaseOrderId}`, order);
   }
 
   // Delete a purchase order by ID
   deletePurchaseOrder(id: number): Observable<PurchaseOrder> {
-    return this.http.delete<PurchaseOrder>(`${this.url}?id=${id}`);
+    return this.http.delete<PurchaseOrder>(`${this.url}/${id}`);
   }
 }

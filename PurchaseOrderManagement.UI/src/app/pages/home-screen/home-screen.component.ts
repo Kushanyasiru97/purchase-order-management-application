@@ -19,6 +19,7 @@ import { TopPanelConfig, TopPanelFilters } from "../../shared/models/top-panel.i
 import { SideFormComponent, PurchaseOrderFormData } from "../../shared/components/side-form/side-form.component";
 import { HeaderComponent } from "../../shared/components/header/header.component";
 import { PurchaseOrderService, PurchaseOrder as ApiPurchaseOrder } from "../../shared/services/purchase-order.service";
+import { FooterComponent } from "../../shared/components/footer/footer.component";
 
 export interface PurchaseOrder {
   id: number;
@@ -53,8 +54,9 @@ export interface PurchaseOrder {
     ConfirmDialogComponent,
     InputSwitchModule,
     SideFormComponent,
-    HeaderComponent
-  ],
+    HeaderComponent,
+    FooterComponent
+],
   providers: [ConfirmationService, MessageService, PurchaseOrderService],
   templateUrl: "./home-screen.component.html",
   styleUrls: ["./home-screen.component.scss"],
@@ -82,7 +84,6 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     showDropdown: true,
     dropdownPlaceholder: "",
     dropdownOptions: [
-      { label: 'All Status', value: '' },
       { label: 'Draft', value: 'Draft' },
       { label: 'Approved', value: 'Approved' },
       { label: 'Shipped', value: 'Shipped' },
@@ -124,7 +125,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     poDescription: "",
     supplier: "",
     orderDate: null,
-    totalAmount: 0,
+    totalAmount: null,
     status: ""
   };
 
@@ -189,13 +190,26 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
 
   // Convert display format to API format
   private mapDisplayToApi(displayOrder: PurchaseOrderFormData): ApiPurchaseOrder {
+    // Convert totalAmount to number
+    let amountValue = 0;
+    if (displayOrder.totalAmount !== null && displayOrder.totalAmount !== undefined) {
+      amountValue = typeof displayOrder.totalAmount === 'string' 
+        ? parseFloat(displayOrder.totalAmount) 
+        : displayOrder.totalAmount;
+      
+      // Ensure it's a valid number
+      if (isNaN(amountValue)) {
+        amountValue = 0;
+      }
+    }
+    
     return {
       purchaseOrderId: displayOrder.id || undefined,
       poNumber: displayOrder.poNumber,
       poDescription: displayOrder.poDescription,
       supplierName: displayOrder.supplier,
       orderDate: displayOrder.orderDate ? new Date(displayOrder.orderDate) : new Date(),
-      totalAmount: displayOrder.totalAmount,
+      totalAmount: amountValue,
       status: displayOrder.status
     };
   }
@@ -250,50 +264,35 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
         this.visibleProducts = filteredOrders.slice(startIndex, endIndex);
         
         console.log('Visible products:', this.visibleProducts);
-        console.log('Total records:', this.totalRecords);
         
         this.loading = false;
         this.cdr.detectChanges();
       },
       error: (error) => {
-        console.error('Error fetching purchase orders:', error);
-        this.showErrorMessage('Failed to load purchase orders. Please check your connection.');
+        console.error('Error loading purchase orders:', error);
         this.loading = false;
-        this.allPurchaseOrders = [];
-        this.visibleProducts = [];
-        this.totalRecords = 0;
+        this.showErrorMessage('Failed to load purchase orders');
         this.cdr.detectChanges();
       }
     });
   }
 
   openCreateNewOrder(): void {
+    console.log('Opening create new order');
+    this.resetFormData();
+    this.sidebarTitle = 'Add Purchase Order';
+    this.sidebarSubtitle = 'Create New Purchase Order';
+    this.acceptButtonLabel = 'Create';
     this.isCreateAction = true;
     this.isUpdateAction = false;
-    
-    const newPoNumber = this.getNextPONumber();
-    
-    this.formData = {
-      id: null,
-      poNumber: newPoNumber,
-      poDescription: "",
-      supplier: "",
-      orderDate: new Date(),
-      totalAmount: 0,
-      status: "Draft"
-    };
-    
-    this.sidebarTitle = "Add Purchase Order";
-    this.sidebarSubtitle = "Create New Purchase Order";
-    this.acceptButtonLabel = "Create";
     this.sidebarVisible = true;
+    this.formSubmitted = false;
+    this.cdr.detectChanges();
   }
 
   openEditOrder(order: PurchaseOrder): void {
-    this.isUpdateAction = true;
-    this.isCreateAction = false;
+    console.log('Opening edit order:', order);
     this.selectedProduct = order;
-    
     this.formData = {
       id: order.id,
       poNumber: order.po_number,
@@ -304,32 +303,54 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
       status: order.status
     };
     
-    this.sidebarTitle = "Edit Purchase Order";
-    this.sidebarSubtitle = "Update Purchase Order Details";
-    this.acceptButtonLabel = "Update";
+    this.sidebarTitle = 'Edit Purchase Order';
+    this.sidebarSubtitle = 'Update Purchase Order Details';
+    this.acceptButtonLabel = 'Update';
+    this.isUpdateAction = true;
+    this.isCreateAction = false;
     this.sidebarVisible = true;
+    this.formSubmitted = false;
+    this.cdr.detectChanges();
   }
 
   private isFormValid(): boolean {
-    return !!(
+    // Convert totalAmount to number for validation
+    let amountValue = 0;
+    if (this.formData.totalAmount !== null && this.formData.totalAmount !== undefined) {
+      amountValue = typeof this.formData.totalAmount === 'string' 
+        ? parseFloat(this.formData.totalAmount) 
+        : this.formData.totalAmount;
+    }
+    
+    const isValid = !!(
       this.formData.poNumber &&
       this.formData.poDescription &&
       this.formData.supplier &&
       this.formData.orderDate &&
-      this.formData.totalAmount > 0 &&
+      this.formData.totalAmount !== null &&
+      this.formData.totalAmount !== undefined &&
+      !isNaN(amountValue) &&
+      amountValue > 0 &&
       this.formData.status
     );
+    
+    console.log('Form validation result:', isValid, this.formData);
+    return isValid;
   }
 
   createPurchaseOrder(formData: PurchaseOrderFormData): void {
-    const newOrder = this.mapDisplayToApi(formData);
+    console.log('Creating purchase order with data:', formData);
     
-    this.purchaseOrderService.createPurchaseOrder(newOrder).subscribe({
+    const apiOrder = this.mapDisplayToApi(formData);
+    console.log('Mapped API order:', apiOrder);
+    
+    this.purchaseOrderService.createPurchaseOrder(apiOrder).subscribe({
       next: (response) => {
         console.log('Create response:', response);
         this.showSuccessMessage('Purchase order created successfully!');
         this.closeSidebar();
-        this.getPurchaseOrders(1);
+        const currentPage = Math.floor(this.first / this.rows) + 1;
+        this.getPurchaseOrders(currentPage);
       },
       error: (error) => {
         console.error('Error creating purchase order:', error);
@@ -339,14 +360,17 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
   }
 
   updatePurchaseOrder(formData: PurchaseOrderFormData): void {
+    console.log('Updating purchase order with data:', formData);
+    
     if (!formData.id) {
-      this.showErrorMessage('Invalid purchase order');
+      this.showErrorMessage('Cannot update: Purchase order ID is missing');
       return;
     }
-
-    const updatedOrder = this.mapDisplayToApi(formData);
     
-    this.purchaseOrderService.updatePurchaseOrder(updatedOrder).subscribe({
+    const apiOrder = this.mapDisplayToApi(formData);
+    console.log('Mapped API order for update:', apiOrder);
+    
+    this.purchaseOrderService.updatePurchaseOrder(formData.id, apiOrder).subscribe({
       next: (response) => {
         console.log('Update response:', response);
         this.showSuccessMessage('Purchase order updated successfully!');
@@ -423,7 +447,7 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
       poDescription: "",
       supplier: "",
       orderDate: null,
-      totalAmount: 0,
+      totalAmount: null,
       status: ""
     };
   }

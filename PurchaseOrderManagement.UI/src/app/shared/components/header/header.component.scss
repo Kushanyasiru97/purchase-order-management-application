@@ -3,6 +3,23 @@ header {
   z-index: 1000;
   position: sticky;
   top: 0;
+
+  .header-content {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      padding: 0 1rem;
+    }
+
+    @media (max-width: 480px) {
+      padding: 0 0.75rem;
+    }
+  }
 }
 
 .font-22 {
@@ -202,7 +219,9 @@ header {
   }
 
   header {
-    padding: 0.75rem 1rem;
+    .header-content {
+      padding: 0 1rem;
+    }
   }
 
   .avatar-wrapper {

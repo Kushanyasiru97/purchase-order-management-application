@@ -1,22 +1,19 @@
-/* Complete top-panel.component.scss with selected date color changes */
 
-/* Method 1: CSS Transform Scale - Larger Size */
 .dual-calendar-container {
   display: flex;
   gap: 4px;
-  transform: scale(0.8); /* Increased from 0.65 to 0.8 (80% of original size) */
+  transform: scale(0.8); 
   transform-origin: top right;
-  margin: -15px 0 0 auto; /* Right-aligned margins */
+  margin: -15px 0 0 auto; 
 }
 
-/* Target PrimeNG calendar components specifically */
 ::ng-deep .custom-calendar {
   .p-calendar {
     width: 10% !important;
     
     .p-datepicker {
-      width: 160px !important; /* Reduced from default ~200px */
-      font-size: 12px !important; /* Smaller font */
+      width: 160px !important; 
+      font-size: 12px !important; 
       
       .p-datepicker-header {
         padding: 0.25rem !important;
@@ -39,7 +36,7 @@
             font-size: 11px !important;
             
             th, td {
-              padding: 0.15rem !important; /* Reduced padding */
+              padding: 0.15rem !important;
               width: 22px !important;
               height: 22px !important;
               
@@ -50,7 +47,7 @@
                 font-size: 10px !important;
               }
               
-              /* Selected date styling */
+              
               &.p-highlight {
                 span {
                   background-color: #001a4c !important;
@@ -59,7 +56,7 @@
                 }
               }
               
-              /* Selected date hover state */
+              
               &.p-highlight:hover {
                 span {
                   background-color: #002a5c !important;
@@ -73,22 +70,21 @@
   }
 }
 
-/* Additional targeting for selected dates - alternative selectors */
 ::ng-deep .custom-calendar {
   .p-datepicker {
-    /* Selected date */
+    
     .p-highlight {
       background-color: #001a4c !important;
       color: white !important;
       border-color: #001a4c !important;
     }
     
-    /* Selected date hover */
+
     .p-highlight:hover {
       background-color: #002a5c !important;
     }
     
-    /* Today's date if it's also selected */
+    
     .p-datepicker-today.p-highlight {
       background-color: #001a4c !important;
       color: white !important;
@@ -105,7 +101,7 @@
   gap: 0.25rem !important;
 }
 
-/* Remove any extra margins from labels */
+
 label {
   margin-bottom: 0.25rem !important;
 }

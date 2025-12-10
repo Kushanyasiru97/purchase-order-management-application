@@ -32,7 +32,7 @@ import { ToastModule } from 'primeng/toast';
 export class HeaderComponent {
   @Input() fontColor: string = '#001a4c';
   pageTitle = 'Purchase Order Management';
-  username: string = 'Admin User';
+  username: string = 'Admin';
   visibleDialog = false;
   loading: boolean = false;
 
@@ -49,7 +49,7 @@ export class HeaderComponent {
           while (route.firstChild) {
             route = route.firstChild;
           }
-          return route.snapshot.data['title'] || 'Purchase Order Management';
+          return route.snapshot.data['title'] || 'Purchase Order Management System';
         })
       )
       .subscribe((title: string) => {

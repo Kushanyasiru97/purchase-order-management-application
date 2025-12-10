@@ -44,7 +44,7 @@ export class TopPanelComponent {
     numberOfMonths: 2,
     yearRange: '2000:2030',
     showDropdown: false,
-    dropdownPlaceholder: 'Select option',
+    dropdownPlaceholder: 'Status',
     dropdownOptions: [],
     showCustomButton: false,
     customButtonLabel: 'Action',
