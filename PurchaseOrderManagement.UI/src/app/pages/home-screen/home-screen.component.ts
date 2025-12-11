@@ -584,4 +584,10 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     });
   }
 
+  truncateText(text: string, maxLength: number = 30): string {
+    if (!text) return '';
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+  }
+
 }
