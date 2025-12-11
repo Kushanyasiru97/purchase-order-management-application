@@ -45,8 +45,7 @@
                 </th>
                 <th style="width: 20%" class="text-center">
                   <div class="flex items-center gap-1 justify-center">
-                    Supplier
-                    
+                    Supplier Name  
                   </div>
                 </th>
                 <th pSortableColumn="order_date" style="width: 10%" class="text-center">
@@ -79,7 +78,7 @@
                 <td class="text-center">{{ order.supplier }}</td>
                 <td class="text-center">{{ formatDate(order.order_date) }}</td>
                 <td class="text-center ">{{ formatCurrency(order.total_amount) }}</td>
-                <td class="text-center">{{ order.po_description }}</td>
+                <td class="text-center">{{ truncateText(order.po_description)}}</td>
                 <td class="text-center">
                   <span 
                     class="status-badge" 
