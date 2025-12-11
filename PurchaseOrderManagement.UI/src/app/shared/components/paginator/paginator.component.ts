@@ -31,7 +31,7 @@ export class PaginatorComponent {
     ];
 
 onRowsChange(newRows: any) {
-  this.rows = Number(newRows); // ensure numeric
+  this.rows = Number(newRows);
   this.first = 0;
   this.emitPagination();
 }

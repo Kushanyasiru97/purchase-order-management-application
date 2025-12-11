@@ -18,7 +18,7 @@ import { TopPanelComponent } from "../../shared/components/top-panel/top-panel.c
 import { TopPanelConfig, TopPanelFilters } from "../../shared/models/top-panel.interface";
 import { SideFormComponent, PurchaseOrderFormData } from "../../shared/components/side-form/side-form.component";
 import { HeaderComponent } from "../../shared/components/header/header.component";
-import { PurchaseOrderService, PurchaseOrder as ApiPurchaseOrder } from "../../shared/services/purchase-order.service";
+import { PurchaseOrderService } from "../../shared/services/purchase-order.service";
 import { FooterComponent } from "../../shared/components/footer/footer.component";
 
 export interface PurchaseOrder {
@@ -29,7 +29,6 @@ export interface PurchaseOrder {
   order_date: string;
   total_amount: number;
   status: string;
-  items_count: number;
 }
 
 @Component({
@@ -107,7 +106,6 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
   sidebarSubtitle = '';
   acceptButtonLabel = '';
   
-  // Store all purchase orders from API
   allPurchaseOrders: PurchaseOrder[] = [];
   visibleProducts: PurchaseOrder[] = [];
 
@@ -160,22 +158,8 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     return isNaN(parsed) ? defaultValue : parsed;
   }
 
-  private getNextPONumber(): string {
-    const currentYear = new Date().getFullYear();
-    const existingNumbers = this.allPurchaseOrders
-      .map(po => {
-        const match = po.po_number.match(/PO-(\d{4})-(\d+)/);
-        return match ? parseInt(match[2]) : 0;
-      });
-    
-    const maxNumber = Math.max(...existingNumbers, 0);
-    const nextNumber = (maxNumber + 1).toString().padStart(3, '0');
-    
-    return `PO-${currentYear}-${nextNumber}`;
-  }
-
   // Convert API response to display format
-  private mapApiToDisplay(apiOrder: ApiPurchaseOrder): PurchaseOrder {
+  private mapApiToDisplay(apiOrder: any): PurchaseOrder {
     return {
       id: apiOrder.purchaseOrderId || 0,
       po_number: apiOrder.poNumber,
@@ -184,20 +168,18 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
       order_date: typeof apiOrder.orderDate === 'string' ? apiOrder.orderDate : new Date(apiOrder.orderDate).toISOString().split('T')[0],
       total_amount: apiOrder.totalAmount,
       status: apiOrder.status,
-      items_count: 0 // This field doesn't exist in API, set default
     };
   }
 
-  // Convert display format to API format
-  private mapDisplayToApi(displayOrder: PurchaseOrderFormData): ApiPurchaseOrder {
-    // Convert totalAmount to number
+  
+  private mapDisplayToApi(displayOrder: PurchaseOrderFormData): any {
+    
     let amountValue = 0;
     if (displayOrder.totalAmount !== null && displayOrder.totalAmount !== undefined) {
       amountValue = typeof displayOrder.totalAmount === 'string' 
         ? parseFloat(displayOrder.totalAmount) 
         : displayOrder.totalAmount;
       
-      // Ensure it's a valid number
       if (isNaN(amountValue)) {
         amountValue = 0;
       }
@@ -218,18 +200,17 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     console.log('getPurchaseOrders called', { currentPage, searchTerm });
     this.loading = true;
     
-    // Call the API service
+    // API service
     this.purchaseOrderService.getPurchaseOrders().subscribe({
-      next: (response: ApiPurchaseOrder[]) => {
+      next: (response: any[]) => {
         console.log('API Response received:', response);
         
-        // Convert API response to display format
         this.allPurchaseOrders = response.map(order => this.mapApiToDisplay(order));
         console.log('Mapped orders:', this.allPurchaseOrders);
         
         let filteredOrders = [...this.allPurchaseOrders];
         
-        // Apply search filter
+        // search filter
         if (searchTerm?.searchstr) {
           const search = searchTerm.searchstr.toLowerCase();
           filteredOrders = filteredOrders.filter(order =>
@@ -238,14 +219,14 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
           );
         }
         
-        // Apply status filter
+        // status filter
         if (searchTerm?.status_id) {
           filteredOrders = filteredOrders.filter(order =>
             order.status === searchTerm.status_id
           );
         }
         
-        // Apply date range filter
+        // date range filter
         if (searchTerm?.start_date && searchTerm?.end_date) {
           const startDate = new Date(searchTerm.start_date);
           const endDate = new Date(searchTerm.end_date);
@@ -258,18 +239,19 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
         
         this.totalRecords = filteredOrders.length;
         
-        // Apply pagination
+        // pagination
         const startIndex = (currentPage - 1) * this.rows;
         const endIndex = startIndex + this.rows;
         this.visibleProducts = filteredOrders.slice(startIndex, endIndex);
         
+        console.log('Filtered orders:', filteredOrders);
         console.log('Visible products:', this.visibleProducts);
         
         this.loading = false;
         this.cdr.detectChanges();
       },
       error: (error) => {
-        console.error('Error loading purchase orders:', error);
+        console.error('Error fetching purchase orders:', error);
         this.loading = false;
         this.showErrorMessage('Failed to load purchase orders');
         this.cdr.detectChanges();
@@ -278,71 +260,55 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
   }
 
   openCreateNewOrder(): void {
-    console.log('Opening create new order');
     this.resetFormData();
-    this.sidebarTitle = 'Add Purchase Order';
-    this.sidebarSubtitle = 'Create New Purchase Order';
+    this.formData.poNumber = '';
+    this.sidebarTitle = 'Create Purchase Order';
+    this.sidebarSubtitle = 'Create new purchase order';
     this.acceptButtonLabel = 'Create';
     this.isCreateAction = true;
     this.isUpdateAction = false;
     this.sidebarVisible = true;
     this.formSubmitted = false;
-    this.cdr.detectChanges();
   }
 
   openEditOrder(order: PurchaseOrder): void {
-    console.log('Opening edit order:', order);
     this.selectedProduct = order;
     this.formData = {
       id: order.id,
       poNumber: order.po_number,
       poDescription: order.po_description,
       supplier: order.supplier,
-      orderDate: new Date(order.order_date),
+      orderDate: order.order_date ? new Date(order.order_date) : null,
       totalAmount: order.total_amount,
       status: order.status
     };
     
     this.sidebarTitle = 'Edit Purchase Order';
-    this.sidebarSubtitle = 'Update Purchase Order Details';
+    this.sidebarSubtitle = `Edit purchase order ${order.po_number}`;
     this.acceptButtonLabel = 'Update';
     this.isUpdateAction = true;
     this.isCreateAction = false;
     this.sidebarVisible = true;
     this.formSubmitted = false;
-    this.cdr.detectChanges();
   }
 
   private isFormValid(): boolean {
-    // Convert totalAmount to number for validation
-    let amountValue = 0;
-    if (this.formData.totalAmount !== null && this.formData.totalAmount !== undefined) {
-      amountValue = typeof this.formData.totalAmount === 'string' 
-        ? parseFloat(this.formData.totalAmount) 
-        : this.formData.totalAmount;
-    }
-    
-    const isValid = !!(
+    return !!(
       this.formData.poNumber &&
       this.formData.poDescription &&
       this.formData.supplier &&
       this.formData.orderDate &&
       this.formData.totalAmount !== null &&
-      this.formData.totalAmount !== undefined &&
-      !isNaN(amountValue) &&
-      amountValue > 0 &&
+      this.formData.totalAmount > 0 &&
       this.formData.status
     );
-    
-    console.log('Form validation result:', isValid, this.formData);
-    return isValid;
   }
 
   createPurchaseOrder(formData: PurchaseOrderFormData): void {
-    console.log('Creating purchase order with data:', formData);
+    console.log('Creating purchase order:', formData);
     
     const apiOrder = this.mapDisplayToApi(formData);
-    console.log('Mapped API order:', apiOrder);
+    console.log('API format:', apiOrder);
     
     this.purchaseOrderService.createPurchaseOrder(apiOrder).subscribe({
       next: (response) => {
@@ -360,15 +326,15 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
   }
 
   updatePurchaseOrder(formData: PurchaseOrderFormData): void {
-    console.log('Updating purchase order with data:', formData);
+    console.log('Updating purchase order:', formData);
     
     if (!formData.id) {
-      this.showErrorMessage('Cannot update: Purchase order ID is missing');
+      this.showErrorMessage('Invalid purchase order ID');
       return;
     }
     
     const apiOrder = this.mapDisplayToApi(formData);
-    console.log('Mapped API order for update:', apiOrder);
+    console.log('API format:', apiOrder);
     
     this.purchaseOrderService.updatePurchaseOrder(formData.id, apiOrder).subscribe({
       next: (response) => {
@@ -618,11 +584,4 @@ export class HomeScreenComponent implements OnInit, AfterViewInit {
     });
   }
 
-  private showInfoMessage(message: string): void {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Info',
-      detail: message,
-    });
-  }
 }

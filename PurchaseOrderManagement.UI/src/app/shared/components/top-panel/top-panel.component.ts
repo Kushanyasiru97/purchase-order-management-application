@@ -1,11 +1,12 @@
-import { Component, EventEmitter, Input, Output, HostListener } from '@angular/core';
+import { Component, EventEmitter, Input, Output, HostListener, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
-import { AutoCompleteModule, AutoCompleteSelectEvent } from 'primeng/autocomplete';
+import { Dropdown } from 'primeng/dropdown';
+import { AutoCompleteModule} from 'primeng/autocomplete';
 import { TopPanelConfig, TopPanelFilters } from '../../models/top-panel.interface';
 import { TooltipModule } from 'primeng/tooltip';
 
@@ -34,6 +35,8 @@ export interface AutocompleteItem {
   styleUrls: ['./top-panel.component.scss']
 })
 export class TopPanelComponent {
+  @ViewChild('dropdown1') dropdown1!: Dropdown;
+  
   @Input() config: TopPanelConfig = {
     searchPlaceholder: 'Search...',
     searchTooltip: 'Search',
@@ -73,9 +76,10 @@ export class TopPanelComponent {
   fromDate!: Date | null;
   toDate!: Date | null;
   dropdown1Value: any = null;
+  
+  isDropdownOpen = false;
 
   private appliedSearchTerm = '';
-  private appliedAutocompleteTerm = '';
 
   ngOnInit(): void {
     if (this.dateRange && this.dateRange.length === 2) {
@@ -120,10 +124,33 @@ export class TopPanelComponent {
 
   toggleDatePicker(): void {
     this.showDatePicker = !this.showDatePicker;
+    
+    if (this.showDatePicker && this.isDropdownOpen) {
+      this.closeDropdown();
+    }
   }
 
   closeDatePicker(): void {
     this.showDatePicker = false;
+  }
+
+  onDropdownShow(): void {
+    this.isDropdownOpen = true;
+    
+    if (this.showDatePicker) {
+      this.showDatePicker = false;
+    }
+  }
+
+  onDropdownHide(): void {
+    this.isDropdownOpen = false;
+  }
+
+  private closeDropdown(): void {
+    if (this.dropdown1) {
+      this.dropdown1.hide();
+    }
+    this.isDropdownOpen = false;
   }
 
   onFromDateChange(date: Date): void {

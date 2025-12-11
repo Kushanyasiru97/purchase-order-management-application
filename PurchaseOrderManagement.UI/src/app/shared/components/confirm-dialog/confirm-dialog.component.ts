@@ -33,7 +33,7 @@ export class ConfirmDialogComponent {
   @Output() delete = new EventEmitter<void>();
 
   ngOnInit() {
-    
+    // console.log("icon",this.icon)
   }
 
   onAccept() {

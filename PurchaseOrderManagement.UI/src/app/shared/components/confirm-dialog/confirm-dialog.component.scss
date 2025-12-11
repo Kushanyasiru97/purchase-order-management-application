@@ -1,4 +1,4 @@
-@import '../../../../styles/variables';
+@import "../../../../styles/variables";
 
 .btn-delete {
     background-color: $btn-red;
@@ -38,6 +38,7 @@
 .p-dialog-header {
     padding: 2rem 1.5rem 0.5rem 1.5rem;
     font-family: 'Urbanist-bold';
+    background-color: white !important;
 
 .p-dialog-title
     {

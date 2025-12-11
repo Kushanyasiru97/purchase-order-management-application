@@ -41,15 +41,18 @@
   <div class="flex flex-col lg:flex-row lg:items-center gap-2 w-full lg:w-auto lg:mt-0 flex-shrink-0 lg:order-3">
     <div *ngIf="config.showDropdown" class="w-full sm:w-auto flex-shrink-0">
       <p-dropdown
+        #dropdown1
         [(ngModel)]="dropdown1Value"
         [options]="config.dropdownOptions || []"
-        [placeholder]="config.dropdownPlaceholder || 'Select Status'"
+        [placeholder]="config.dropdownPlaceholder || 'Status'"
         optionLabel="label"
         optionValue="value"
         [showClear]="true"
         styleClass="w-full sm:w-24 md:w-32 lg:w-36 top-dropdown"
         panelStyleClass="text-sm"
         (onChange)="onDropdown1Change($event)"
+        (onShow)="onDropdownShow()"
+        (onHide)="onDropdownHide()"
         class="custom-dropdown"
         [style]="{
           border: '1px solid #D1D5DB',
