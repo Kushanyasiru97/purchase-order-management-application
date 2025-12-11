@@ -1,0 +1,29 @@
+::ng-deep {
+  // Remove internal border from p-inputNumber and make it full width
+  p-inputnumber {
+    width: 100% !important;
+    display: block !important;
+    
+    .p-inputnumber-input {
+      width: 100% !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      
+      &:focus {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+  
+  // Remove blue focus border from calendar
+  p-calendar {
+    .p-inputtext {
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+  }
+}

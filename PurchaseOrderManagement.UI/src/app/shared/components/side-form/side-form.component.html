@@ -6,14 +6,11 @@
   (onHide)="onSidebarHide()"
 >
   <div class="px-6 py-2">
-    <h2 class="text-lg font-semibold text-[#000000]">
-      {{ title }}
-    </h2>
+    <h2 class="text-lg font-semibold text-[#000000]">{{ title }}</h2>
     <p class="text-sm text-[#6C7278] mt-1">{{ subtitle }}</p>
   </div>
 
   <form [formGroup]="poForm" class="px-6 py-4 space-y-4">
-    <!-- PO Number -->
     <div class="form-group">
       <label class="block text-sm font-semibold text-[#242E2C] mb-2">
         PO Number
@@ -24,19 +21,15 @@
         placeholder="Enter PO number"
         formControlName="poNumber"
         [readonly]="readonly"
-        class="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none "
+        class="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none"
         [class.cursor-not-allowed]="readonly"
         [class.border-red-500]="hasFieldError('poNumber')"
       />
-      <div
-        *ngIf="hasFieldError('poNumber')"
-        class="text-[#bb2027] text-xs mt-1"
-      >
+      <div *ngIf="hasFieldError('poNumber')" class="text-[#bb2027] text-xs mt-1">
         {{ getFieldError("poNumber") }}
       </div>
     </div>
 
-    <!-- PO Description -->
     <div class="form-group">
       <label class="block text-sm font-semibold text-[#242E2C] mb-2">
         PO Description
@@ -47,19 +40,15 @@
         formControlName="poDescription"
         [readonly]="readonly"
         rows="3"
-        class="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none "
+        class="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none"
         [class.cursor-not-allowed]="readonly"
         [class.border-red-500]="hasFieldError('poDescription')"
       ></textarea>
-      <div
-        *ngIf="hasFieldError('poDescription')"
-        class="text-[#bb2027] text-xs mt-1"
-      >
+      <div *ngIf="hasFieldError('poDescription')" class="text-[#bb2027] text-xs mt-1">
         {{ getFieldError("poDescription") }}
       </div>
     </div>
 
-    <!-- Supplier Name -->
     <div class="form-group">
       <label class="block text-sm font-semibold text-[#242E2C] mb-2">
         Supplier Name
@@ -70,19 +59,15 @@
         placeholder="Enter supplier name"
         formControlName="supplier"
         [readonly]="readonly"
-        class="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none "
+        class="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none"
         [class.cursor-not-allowed]="readonly"
         [class.border-red-500]="hasFieldError('supplier')"
       />
-      <div
-        *ngIf="hasFieldError('supplier')"
-        class="text-[#bb2027] text-xs mt-1"
-      >
+      <div *ngIf="hasFieldError('supplier')" class="text-[#bb2027] text-xs mt-1">
         {{ getFieldError("supplier") }}
       </div>
     </div>
 
-    <!-- Order Date -->
     <div class="form-group">
       <label class="block text-sm font-semibold text-[#242E2C] mb-2">
         Order Date
@@ -97,47 +82,34 @@
           dateFormat="mm/dd/yy"
           [disabled]="readonly"
           [appendTo]="'body'"
-          styleClass="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none "
-          [style]="{
-            border: 'none',
-            background: 'transparent',
-            height: '40px'
-          }"
+          styleClass="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none"
+          [style]="{border: 'none', background: 'transparent', height: '40px'}"
         ></p-calendar>
       </div>
-      <div
-        *ngIf="hasFieldError('orderDate')"
-        class="text-[#bb2027] text-xs mt-1"
-      >
+      <div *ngIf="hasFieldError('orderDate')" class="text-[#bb2027] text-xs mt-1">
         {{ getFieldError("orderDate") }}
       </div>
     </div>
 
-    <!-- Total Amount -->
     <div class="form-group">
       <label class="block text-sm font-semibold text-[#242E2C] mb-2">
-        Total Amount (LKR)
-        <span class="text-[#bb2027]">*</span>
+        Total Amount (LKR) <span class="text-[#bb2027]">*</span>
       </label>
-      <input
-        type="text"
-        placeholder="0.00"
-        formControlName="totalAmount"
-        [readonly]="readonly"
-        class="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none "
-        [class.cursor-not-allowed]="readonly"
-        [class.border-red-500]="hasFieldError('totalAmount')"
-        (blur)="formatAmountOnBlur()"
-      />
-      <div
-        *ngIf="hasFieldError('totalAmount')"
-        class="text-[#bb2027] text-xs mt-1"
-      >
+      <p-inputNumber 
+        formControlName="totalAmount" 
+        [disabled]="readonly"
+        mode="decimal" 
+        [minFractionDigits]="2"
+        [maxFractionDigits]="2"
+        placeholder="Enter total amount"
+        class="w-full px-3 py-2 border border-gray-300 text-[#242E2C] rounded-md bg-gray-50 focus:outline-none"
+        [class.border-red-500]="hasFieldError('totalAmount')">
+      </p-inputNumber>
+      <div *ngIf="hasFieldError('totalAmount')" class="text-[#bb2027] text-xs mt-1">
         {{ getFieldError("totalAmount") }}
       </div>
     </div>
 
-    <!-- Status -->
     <div class="form-group">
       <label class="block text-sm font-semibold text-[#242E2C] mb-2">
         Status
@@ -152,20 +124,13 @@
           placeholder="Select status"
           [disabled]="readonly"
           styleClass="w-full border-none bg-transparent items-center"
-          [style]="{
-            border: 'none',
-            background: 'transparent',
-            height: '40px'
-          }"
+          [style]="{border: 'none', background: 'transparent', height: '40px'}"
           optionLabel="label"
           optionValue="value"
           [appendTo]="'body'"
         ></p-dropdown>
       </div>
-      <div
-        *ngIf="hasFieldError('status')"
-        class="text-[#bb2027] text-xs mt-1"
-      >
+      <div *ngIf="hasFieldError('status')" class="text-[#bb2027] text-xs mt-1">
         {{ getFieldError("status") }}
       </div>
     </div>
@@ -180,14 +145,14 @@
       class="btn-secondary"
       (click)="onClose()"
     ></button>
-      <button
-        *ngIf="showAcceptButton"
-        pButton
-        type="button"
-        [label]="acceptButtonLabel"
-        [disabled]="!isFormValid"
-        class="btn-primary font-14"
-        (click)="onAccept()"
-      ></button>
+    <button
+      *ngIf="showAcceptButton"
+      pButton
+      type="button"
+      [label]="acceptButtonLabel"
+      [disabled]="!isFormValid"
+      class="btn-primary font-14"
+      (click)="onAccept()"
+    ></button>
   </div>
 </p-sidebar>
